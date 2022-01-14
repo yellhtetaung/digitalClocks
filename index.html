@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            font-family: sans-serif;
+            font-size: 35px;
+            background-color: #00124f;
+            color: #fff;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            border: 3px solid #00fcca;
+            border-radius: 10px;
+
+            padding: 40px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            -webkit-box-reflect: below 5px linear-gradient(transparent,transparent,rgba(255,255,255,0.5));
+        }
+        #dayNight{
+            background-color: #ff0000;
+            border-radius: 5px;
+
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="datetime">
+            <span id="dayname">00</span>,
+            <span id="month">Month</span>
+            <span id="daynum">00</span>,
+            <span id="year">Year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>:
+            <span id="minute">00</span>:
+            <span id="second">00</span>
+            <span id="dayNight">AM</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setInterval(() => {
+            let daynum = document.getElementById("daynum");
+            let dayname = document.getElementById("dayname");
+            let month = document.getElementById("month");
+            let year = document.getElementById("year");
+            let hour = document.getElementById("hour");
+            let minutes = document.getElementById("minute");
+            let seconds = document.getElementById("second");
+            let dayNight = document.getElementById("dayNight");
+
+            let date = new Date();
+            let daynum1 = date.getDate();
+            let dayname1 = date.getDay();
+            let mm = date.getMonth();
+            let yy = date.getFullYear();
+            let hh = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+
+            let week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            daynum.textContent = daynum1;
+            dayname.textContent = week[dayname1];
+            month.textContent = monthName[mm];
+            year.textContent = yy;
+            hour.textContent = hh;
+            minutes.textContent = min;
+            seconds.textContent = sec;
+
+            if(hh === 0){
+                hour.textContent = 12;
+            }
+            if(hh > 12){
+                hour.textContent = hh -12;
+                dayNight.textContent = "PM";
+            }else{
+                dayNight.textContent = "AM";
+            }
+            if(hh < 10){
+                hour.textContent = "0" + hh;
+            }
+            if(min < 10){
+                minutes.textContent = "0" + min;
+            }
+            if(sec < 10){
+                seconds.textContent = "0" + sec;
+            }
+        });
+    </script>
+</body>
+</html>
